@@ -71,6 +71,12 @@ def get_sql_agent():
        - ALWAYS add this filter to your WHERE clause: 
          Description NOT IN ('{ignored_str}')
     3. Do NOT execute DML statements (INSERT, UPDATE, DELETE, DROP).
+    4. FORMATTING RULES (VERY IMPORTANT):
+       - Do NOT output "Final Answer" and an "Action" in the same response.
+       - If you need to run a query, output ONLY the Action.
+       - If you have the result, output ONLY the Final Answer.
+       - Do NOT wrap the SQL query in markdown blocks (like ```sql).
+       - The Action Input must be the RAW SQL string only.
     """
 
     agent = create_sql_agent(

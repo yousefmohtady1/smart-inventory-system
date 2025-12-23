@@ -21,15 +21,24 @@ def load_raw_data_for_dashboard():
     query = """
     SELECT
         t.InvoiceDate, p.Description, t.Quantity, t.Price, 
-        (t.Quantity * t.Price) as TotalAmount, t.Invoice
+        (t.Quantity * t.Price) as TotalAmount, t.Invoice, t."Customer ID" as CustomerID
     FROM transactions t
     JOIN products p ON t.StockCode = p.StockCode
+    WHERE t.Quantity > 0
     """
 
     df = pd.read_sql(query, conn)
     conn.close()
     df['InvoiceDate'] = pd.to_datetime(df['InvoiceDate'])
-    return df
+
+    ignore_list = [
+        'POSTAGE', 'DOTCOM POSTAGE', 'CRUK Commission', 
+        'Manual', 'Bank Charges', 'Discount', 'SAMPLES',
+        'AMAZON FEE', 'Adjust bad debt', 'CARRIAGE'
+    ]
+
+    df_clean = df[~df['Description'].isin(ignore_list)]
+    return df_clean
 
 def load_best_model_from_mlflow():
     try:
@@ -82,14 +91,22 @@ if page == "Dashboard Overview":
     st.divider()
 
     # Charts
+    st.subheader("Monthly Sales Trend")
+    monthly_Sales = df.set_index('InvoiceDate').resample('ME')['TotalAmount'].sum().reset_index()
+    fig_line = px.line(monthly_Sales, x='InvoiceDate', y='TotalAmount', markers=True, template="plotly_white")
+    fig_line.update_traces(line_color = "blue", line_width = 2)
+    st.plotly_chart(fig_line, use_container_width=True)
+
     c1, c2 = st.columns(2)
 
     with c1:
-        st.subheader("Monthly Sales Trend")
-        monthly_Sales = df.set_index('InvoiceDate').resample('ME')['TotalAmount'].sum().reset_index()
-        fig_line = px.line(monthly_Sales, x='InvoiceDate', y='TotalAmount', markers=True, template="plotly_white")
-        fig_line.update_traces(line_color = "blue", line_width = 2)
-        st.plotly_chart(fig_line, use_container_width=True)
+        st.subheader("Customer Spending Distribution")
+        customer_sales = df.groupby('CustomerID')['TotalAmount'].sum()
+        # Filter < 5000 to focus on main distribution as requested
+        filtered_sales = customer_sales[customer_sales < 5000]
+        fig_hist = px.histogram(filtered_sales, nbins=50, template="plotly_white")
+        fig_hist.update_layout(showlegend=False, xaxis_title="Total Spent", yaxis_title="Count")
+        st.plotly_chart(fig_hist, use_container_width=True)
 
     with c2:
         st.subheader("Top 10 Best Selling Products")
