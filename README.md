@@ -2,6 +2,28 @@
 
 An AI-powered inventory management and analysis system that combines **Data Analytics**, **Demand Forecasting (Random Forest)**, and a **GenAI Smart Assistant (LangChain + Groq/Llama4)** to help businesses optimize stock and understand sales trends.
 
+## 🚀 Live Demo
+
+[Click here to try the App!](https://smart-inventory-system1.streamlit.app/)
+
+## 📸 Screenshots
+
+### 1. Business Dashboard
+
+![Dashboard View](assets/dashboard_view1.png)
+![Dashboard View](assets/dashboard_view2.png)
+
+### 2. AI SQL Agent (Chatbot)
+
+> The agent can answer complex queries about sales and customers.
+> ![Chatbot Demo](assets/chatbot_demo.png)
+
+### 3. Demand Forecasting
+
+![Forecasting Page](assets/forecast_page.png)
+
+---
+
 ## 🌟 Features
 
 ### 1. 📈 Dashboard Overview
