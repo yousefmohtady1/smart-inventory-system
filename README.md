@@ -1,6 +1,6 @@
 # Smart Inventory System 📊🤖
 
-An AI-powered inventory management and analysis system that combines **Data Analytics**, **Demand Forecasting (Random Forest)**, and a **GenAI Smart Assistant (LangChain + Groq/Llama3)** to help businesses optimize stock and understand sales trends.
+An AI-powered inventory management and analysis system that combines **Data Analytics**, **Demand Forecasting (Random Forest)**, and a **GenAI Smart Assistant (LangChain + Groq/Llama4)** to help businesses optimize stock and understand sales trends.
 
 ## 🌟 Features
 
