@@ -20,6 +20,9 @@ DB_PATH = BASE_DIR / DB_NAME
 
 # MLflow & Models
 MLRUNS_DIR = BASE_DIR / "mlruns"
+MODELS_DIR = BASE_DIR / "models"
+MODEL_FILE_NAME = "sales_model.pkl"
+TRAINED_MODEL_PATH = MODELS_DIR / MODEL_FILE_NAME
 
 # API Keys
 try:

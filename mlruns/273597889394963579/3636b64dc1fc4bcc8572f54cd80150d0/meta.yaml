@@ -1,8 +1,9 @@
 artifact_uri: file:///E:/programing/AI%20RAG/Smart%20Inventory%20System/smart-inventory-system/mlruns/273597889394963579/3636b64dc1fc4bcc8572f54cd80150d0/artifacts
+deleted_time: 1766508791707
 end_time: 1766450788168
 entry_point_name: ''
 experiment_id: '273597889394963579'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: 3636b64dc1fc4bcc8572f54cd80150d0
 run_name: RF_n200_d20
 source_name: ''

@@ -2,6 +2,7 @@ import pandas as pd
 import logging
 import mlflow
 import mlflow.sklearn
+import joblib
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.model_selection import train_test_split
@@ -46,6 +47,10 @@ def train_sales_forecast_model(n_estimators, max_depth):
             'mse': mean_squared_error(y_test, predictions),
             'r2': r2_score(y_test, predictions)
         }
+
+        MODELS_DIR.mkdir(exist_ok=True)
+        joblib.dump(model, TRAINED_MODEL_PATH)
+        logger.info(f"Model saved explicitly for deployment at {TRAINED_MODEL_PATH}")
 
         mlflow.log_params(params)
         mlflow.log_metrics(metrics)

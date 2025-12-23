@@ -5,7 +5,8 @@ import sqlite3
 import mlflow
 import mlflow.sklearn
 from datetime import timedelta
-from src.config.settings import DB_PATH, MLRUNS_DIR
+import joblib
+from src.config.settings import DB_PATH, MLRUNS_DIR, TRAINED_MODEL_PATH
 from src.agents.sql_agent import get_sql_agent, input_guardrail
 from src.ml.data_preparation import load_and_prepare_data
 
@@ -131,34 +132,33 @@ elif page == "AI Sales Forecast":
     with col_right:
         st.subheader("Next Month Prediction")
 
-        with st.spinner("Searching for best model in MLflow..."):
-            model, msg = load_best_model_from_mlflow()
-            
-        if model:
-            st.success(f"{msg}")
-            
-
-            last_date = model_data['ds'].max()
-            next_month_date = last_date + pd.DateOffset(months=1)
-            last_month_sales = model_data.iloc[-1]['y']
-            
-            next_features = pd.DataFrame({
-                'month': [next_month_date.month],
-                'year': [next_month_date.year],
-                'prev_month_sales': [last_month_sales]
-            })
-            
-            prediction = model.predict(next_features)[0]
-            
-            growth = ((prediction - last_month_sales) / last_month_sales) * 100
-            
-            st.metric(
-                label=f"Forecast for {next_month_date.strftime('%B %Y')}",
-                value=f"£{prediction:,.2f}",
-                delta=f"{growth:+.2f}% vs Last Month"
-            )
+        if TRAINED_MODEL_PATH.exists():
+            try:
+                model = joblib.load(TRAINED_MODEL_PATH)
+                st.success("Model loaded successfully.")
+                
+                last_date = model_data['ds'].max()
+                next_month_date = last_date + pd.DateOffset(months=1)
+                last_month_sales = model_data.iloc[-1]['y']
+                
+                next_features = pd.DataFrame({
+                    'month': [next_month_date.month],
+                    'year': [next_month_date.year],
+                    'prev_month_sales': [last_month_sales]
+                })
+                
+                prediction = model.predict(next_features)[0]
+                growth = ((prediction - last_month_sales) / last_month_sales) * 100
+                
+                st.metric(
+                    label=f"Forecast for {next_month_date.strftime('%B %Y')}",
+                    value=f"£{prediction:,.2f}",
+                    delta=f"{growth:+.2f}% vs Last Month"
+                )
+            except Exception as e:
+                st.error(f"Error loading model: {e}")
         else:
-            st.error(f"Could not load model: {msg}")
+            st.warning("Model file not found. Please run training script locally and push the 'models' folder.")
 
 # Page 3: Smart Assistant (Chatbot)
 elif page == "Smart Assistant":
