@@ -10,17 +10,17 @@ An AI-powered inventory management and analysis system that combines **Data Anal
 
 ### 1. Business Dashboard
 
-![Dashboard View](assets/dashboard_view1.png)
-![Dashboard View](assets/dashboard_view2.png)
+<img src="assets/dashboard_view1.png" alt="Dashboard View" width="700px">
+<img src="assets/dashboard_view2.png" alt="Dashboard View" width="700px">
 
 ### 2. AI SQL Agent (Chatbot)
 
 > The agent can answer complex queries about sales and customers.
-> ![Chatbot Demo](assets/chatbot_demo.png)
+> <img src="assets/chatbot_demo.png" alt="Chatbot Demo" width="700px">
 
 ### 3. Demand Forecasting
 
-![Forecasting Page](assets/forecast_page.png)
+<img src="assets/forecast_page.png" alt="Forecasting Page" width="700px">
 
 ---
 
