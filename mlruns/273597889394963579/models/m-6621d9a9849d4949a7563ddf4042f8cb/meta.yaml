@@ -1,0 +1,10 @@
+artifact_location: file:///E:/programing/AI%20RAG/Smart%20Inventory%20System/smart-inventory-system/mlruns/273597889394963579/models/m-6621d9a9849d4949a7563ddf4042f8cb/artifacts
+creation_timestamp: 1766450779256
+experiment_id: '273597889394963579'
+last_updated_timestamp: 1766450788146
+model_id: m-6621d9a9849d4949a7563ddf4042f8cb
+model_type: null
+name: random_forest_model
+source_run_id: 3636b64dc1fc4bcc8572f54cd80150d0
+status: 2
+status_message: null

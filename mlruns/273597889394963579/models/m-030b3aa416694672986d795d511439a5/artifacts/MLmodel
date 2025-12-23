@@ -1,0 +1,22 @@
+artifact_path: file:///E:/programing/AI%20RAG/Smart%20Inventory%20System/smart-inventory-system/mlruns/273597889394963579/models/m-030b3aa416694672986d795d511439a5/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.10.11
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.2
+mlflow_version: 3.5.0
+model_id: m-030b3aa416694672986d795d511439a5
+model_size_bytes: 91412
+model_uuid: m-030b3aa416694672986d795d511439a5
+prompts: null
+run_id: faf1e0d0a0d84c8e8759adc3ce97e7df
+utc_time_created: '2025-12-23 00:45:19.642701'

@@ -1,0 +1,14 @@
+artifact_uri: file:///E:/programing/AI%20RAG/Smart%20Inventory%20System/smart-inventory-system/mlruns/273597889394963579/db4767f162bb4c63985830b658d60edf/artifacts
+end_time: 1766450759000
+entry_point_name: ''
+experiment_id: '273597889394963579'
+lifecycle_stage: active
+run_id: db4767f162bb4c63985830b658d60edf
+run_name: RF_n100_d10
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766450750616
+status: 3
+tags: []
+user_id: HP
