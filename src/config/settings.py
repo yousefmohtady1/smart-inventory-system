@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+import streamlit as st
 
 # Load environment variables from .env file
 load_dotenv()
@@ -21,4 +22,9 @@ DB_PATH = BASE_DIR / DB_NAME
 MLRUNS_DIR = BASE_DIR / "mlruns"
 
 # API Keys
-GROQ_API_KEY = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY"))
+try:
+    # Try loading from Streamlit secrets first (for cloud deployment)
+    GROQ_API_KEY = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY"))
+except Exception:
+    # Fallback to .env for local scripts (training, etc.)
+    GROQ_API_KEY = os.getenv("GROQ_API_KEY")
